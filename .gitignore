@@ -1,0 +1,8 @@
+.next/
+node_modules/
+.tools/
+.pnpm-install.ps1
+*.log
+.env*
+!.env.example
+

@@ -1,0 +1,23 @@
+[Unit]
+Description=Arena.ai Telegram proxy bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=arena-bot
+Group=arena-bot
+WorkingDirectory=/opt/arena-telegram-proxy-bot
+Environment=HOME=/var/lib/arena-bot
+Environment=PLAYWRIGHT_BROWSERS_PATH=/opt/ms-playwright
+EnvironmentFile=/etc/arena-bot.env
+ExecStart=/usr/bin/xvfb-run -a -s "-screen 0 1365x768x24" /opt/arena-telegram-proxy-bot/.venv/bin/python -m arena_proxy_bot
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ReadWritePaths=/opt/arena-telegram-proxy-bot /var/lib/arena-bot /opt/ms-playwright
+
+[Install]
+WantedBy=multi-user.target
